@@ -22,22 +22,22 @@ const data = {
       items: [
         {
           title: "Playlists",
-          url: "#",
+          url: "/playlists",
           icon: "/playlist.svg",
         },
         {
           title: "Songs",
-          url: "#",
+          url: "/songs",
           icon: "/song.svg",
         },
         {
           title: "Artists",
-          url: "#",
+          url: "/artists",
           icon: "/artist.svg",
         },
         {
           title: "Albums",
-          url: "#",
+          url: "/albums",
           icon: "/album.svg",
         },
       ],
