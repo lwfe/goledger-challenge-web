@@ -1,18 +1,13 @@
 import "../styles/globals.css";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Lato } from "next/font/google";
 import { AppSidebar } from "@/components/app-sidebar";
+import { ReactQueryProvider } from "@/provider/react-query-client";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
-const geistSans = localFont({
-  src: "../styles/fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "../styles/fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const lato = Lato({
+  subsets: ["latin"],
+  weight: ["100", "300", "400", "700", "900"],
 });
 
 export const metadata: Metadata = {
@@ -27,13 +22,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <SidebarProvider>
-          <AppSidebar />
-          <SidebarInset>{children}</SidebarInset>
-        </SidebarProvider>
+      <body className={lato.className}>
+        <ReactQueryProvider>
+          <SidebarProvider>
+            <AppSidebar />
+            <SidebarInset>{children}</SidebarInset>
+          </SidebarProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );
