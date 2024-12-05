@@ -31,4 +31,4 @@ const filterAlbums = async (filters: {
 };
 
 export type { IAlbum };
-export { filterAlbums };
+export default Object.freeze({ filterAlbums });
