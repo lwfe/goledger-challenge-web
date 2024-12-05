@@ -1,21 +1,14 @@
-"use client";
+import album, { IAlbum } from "@/models/album";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
-import { useEffect, useState } from "react";
-import { filterAlbums, IAlbum } from "@/models/album";
-
-const useAlbums = () => {
-  const [albums, setAlbums] = useState<IAlbum[]>([]);
-
-  const fetchAlbums = async () => {
-    const results = await filterAlbums({ filters: [] });
-    setAlbums(results);
-  };
-
-  useEffect(() => {
-    fetchAlbums();
-  }, []);
+export const useAlbums = () => {
+  const { data: albums } = useSuspenseQuery<IAlbum[]>({
+    queryKey: ["albums"],
+    queryFn: async () => {
+      const results = await album.filterAlbums({ filters: [] });
+      return results;
+    },
+  });
 
   return { albums };
 };
-
-export { useAlbums };
