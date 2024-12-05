@@ -6,11 +6,11 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 
 const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main className="flex flex-1 flex-col gap-4 p-4">
+    <div className="flex flex-1 flex-col gap-4 p-4">
       <SidebarTrigger className="-ml-1" />
 
       {children}
-    </main>
+    </div>
   );
 };
 
