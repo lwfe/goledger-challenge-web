@@ -29,7 +29,7 @@ const LayoutHeader = ({
   actionTitle,
 }: LayoutHeaderProps) => {
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-0 justify-between">
       <div>
         <h1 className="text-2xl font-semibold">{title}</h1>
         <h4>{description}</h4>
