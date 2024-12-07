@@ -1,8 +1,11 @@
 import "../styles/globals.css";
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
-import { AppSidebar } from "@/components/app-sidebar";
+
 import { ReactQueryProvider } from "@/provider/react-query-client";
+
+import { Toaster } from "@/components/ui/toaster";
+import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 const lato = Lato({
@@ -29,6 +32,7 @@ export default function RootLayout({
             <SidebarInset>{children}</SidebarInset>
           </SidebarProvider>
         </ReactQueryProvider>
+        <Toaster />
       </body>
     </html>
   );
