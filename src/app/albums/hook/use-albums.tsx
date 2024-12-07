@@ -28,6 +28,12 @@ export const useAlbums = () => {
     },
   });
 
+  const findAlbumMutation = useMutation({
+    mutationFn: async (id: string) => {
+      return await album.findAlbum(id);
+    },
+  });
+
   const crerateAlbumMutation = useMutation({
     mutationFn: async (data: IAlbumAsset) => {
       return await album.createAlbum(data);
@@ -69,10 +75,31 @@ export const useAlbums = () => {
     },
   });
 
+  const updateAlbumMutation = useMutation({
+    mutationFn: async (data: IAlbum) => {
+      return await album.updateAlbum(data);
+    },
+    onSuccess: () => {
+      toast({
+        title: "Success",
+        description: `Album updated successfully`,
+      });
+      albumsQuery.refetch();
+    },
+    onError: (error) => {
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
   return {
     albums: albumsQuery.data,
     artists: artistsQuery.data,
     crerateAlbumMutation,
     deleteAlbumMutation,
+    findAlbumMutation,
   };
 };

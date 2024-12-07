@@ -1,15 +1,7 @@
 import Image from "next/image";
-import { Pencil, Trash2 } from "lucide-react";
-
 import { cn } from "@/lib/utils";
-import {
-  ContextMenu,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuSeparator,
-  ContextMenuTrigger,
-} from "@/components/ui/context-menu";
 import { IAlbum } from "@/models/album";
+import Link from "next/link";
 
 export interface Album {
   name: string;
@@ -30,43 +22,32 @@ export function AlbumArtwork({
   width,
   height,
   className,
-  ...props
 }: AlbumArtworkProps) {
   return (
-    <div className={cn("space-y-3", className)} {...props}>
-      <ContextMenu>
-        <ContextMenuTrigger>
-          <div className="w-[300px] h-[300px] overflow-hidden rounded-md">
-            <Image
-              src={"https://picsum.photos/300"}
-              alt={album.name}
-              width={width}
-              height={height}
-              className={cn(
-                "w-auto h-auto object-cover transition-all hover:scale-105",
-                aspectRatio === "portrait" ? "aspect-[3/4]" : "aspect-square"
-              )}
-            />
-          </div>
-        </ContextMenuTrigger>
-        <ContextMenuContent className="w-40">
-          <ContextMenuItem>Add to Library</ContextMenuItem>
+    <Link
+      href={`/albums/${album["@key"].split(":")[1]}`}
+      className={cn(
+        "space-y-3 cursor-pointer hover:bg-secondary p-2 rounded-md",
+        className
+      )}
+    >
+      <div className="w-full h-auto overflow-hidden rounded-sm">
+        <Image
+          src={"https://picsum.photos/300"}
+          alt={album.name}
+          width={width}
+          height={height}
+          className={cn(
+            "w-auto h-auto object-cover transition-all hover:scale-105",
+            aspectRatio === "portrait" ? "aspect-[3/4]" : "aspect-square"
+          )}
+        />
+      </div>
 
-          <ContextMenuSeparator />
-          <ContextMenuItem>
-            <Pencil className="mr-2 h-4 w-4" />
-            Edit
-          </ContextMenuItem>
-          <ContextMenuItem className="text-destructive">
-            <Trash2 className="mr-2 h-4 w-4" />
-            Delete
-          </ContextMenuItem>
-        </ContextMenuContent>
-      </ContextMenu>
       <div className="space-y-1 text-sm">
         <h3 className="font-medium leading-none">{album.name}</h3>
         <p className="text-xs text-muted-foreground">{album.year}</p>
       </div>
-    </div>
+    </Link>
   );
 }

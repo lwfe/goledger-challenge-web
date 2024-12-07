@@ -71,5 +71,26 @@ const deleteAlbum = async (album: IAlbum) => {
   }
 };
 
+const findAlbum = async (id: string) => {
+  try {
+    const results = await api.post("/query/search", {
+      query: {
+        selector: {
+          "@assetType": "album",
+          "@key": `album:${id}`,
+        },
+      },
+    });
+    return results.data.result[0];
+  } catch (error) {
+    throw error;
+  }
+};
+
 export type { IAlbum, IAlbumAsset };
-export default Object.freeze({ filterAlbums, createAlbum, deleteAlbum });
+export default Object.freeze({
+  filterAlbums,
+  createAlbum,
+  deleteAlbum,
+  findAlbum,
+});
