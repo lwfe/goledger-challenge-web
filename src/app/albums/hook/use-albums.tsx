@@ -2,7 +2,7 @@ import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { IOptions } from "@/models/options";
 import artist, { IArtist } from "@/models/artist";
-import album, { IAlbum, IAlbumAsset } from "@/models/album";
+import album, { IAlbum, IAlbumAsset, IUpdateAlbum } from "@/models/album";
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 
 export const useAlbums = () => {
@@ -76,7 +76,7 @@ export const useAlbums = () => {
   });
 
   const updateAlbumMutation = useMutation({
-    mutationFn: async (data: IAlbum) => {
+    mutationFn: async (data: IUpdateAlbum) => {
       return await album.updateAlbum(data);
     },
     onSuccess: () => {
@@ -84,7 +84,7 @@ export const useAlbums = () => {
         title: "Success",
         description: `Album updated successfully`,
       });
-      albumsQuery.refetch();
+      route.push(`/albums`);
     },
     onError: (error) => {
       toast({
@@ -101,5 +101,6 @@ export const useAlbums = () => {
     crerateAlbumMutation,
     deleteAlbumMutation,
     findAlbumMutation,
+    updateAlbumMutation,
   };
 };

@@ -1,15 +1,9 @@
-"use client";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LayoutWrapper } from "@/components/layout";
-import { UpdateAlbumForm } from "./components/form";
 
-export default function AlbumDetailsPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default function AlbumDetailsPage() {
   return (
     <LayoutWrapper>
       <Link href="/albums" className="w-fit">
@@ -23,8 +17,6 @@ export default function AlbumDetailsPage({
         <h1 className="text-2xl font-semibold">Edit Album</h1>
         <h4>Fill the form to update the album</h4>
       </div>
-
-      <UpdateAlbumForm albumId={params.id} />
     </LayoutWrapper>
   );
 }

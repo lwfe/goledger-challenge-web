@@ -1,5 +1,5 @@
 import { api } from "@/lib/api";
-import { IArtist, IArtistAsset } from "@/models/artist";
+import { IArtist } from "@/models/artist";
 
 interface IAlbum {
   "@assetType": string;
@@ -14,7 +14,7 @@ interface IAlbum {
 
 interface IAlbumAsset {
   name: string;
-  artist: IArtistAsset;
+  artist: string;
   year: number;
 }
 
@@ -44,7 +44,9 @@ const createAlbum = async (album: IAlbumAsset) => {
           "@assetType": "album",
           name: album.name,
           year: album.year,
-          artist: album.artist,
+          artist: {
+            "@key": `artist:${album.artist}`,
+          },
         },
       ],
     });
@@ -71,7 +73,7 @@ const deleteAlbum = async (album: IAlbum) => {
   }
 };
 
-const findAlbum = async (id: string) => {
+const findAlbum = async (id: string): Promise<IAlbum> => {
   try {
     const results = await api.post("/query/search", {
       query: {
@@ -87,10 +89,35 @@ const findAlbum = async (id: string) => {
   }
 };
 
-export type { IAlbum, IAlbumAsset };
+interface IUpdateAlbum {
+  "@key": string;
+  name: string;
+  year: number;
+  artist: string;
+}
+
+const updateAlbum = async (data: IUpdateAlbum) => {
+  try {
+    const results = await api.post("/invoke/updateAsset", {
+      update: {
+        "@assetType": "album",
+        "@key": `album:${data["@key"]}`,
+        artist: {
+          "@key": `album:${data.artist}`,
+        },
+      },
+    });
+    return results.data;
+  } catch (error: any) {
+    throw new Error(error.response.data.error);
+  }
+};
+
+export type { IAlbum, IAlbumAsset, IUpdateAlbum };
 export default Object.freeze({
   filterAlbums,
   createAlbum,
   deleteAlbum,
   findAlbum,
+  updateAlbum,
 });

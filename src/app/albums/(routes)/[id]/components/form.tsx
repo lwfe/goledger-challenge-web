@@ -17,16 +17,14 @@ import {
 } from "@/components/ui/form";
 
 import Select from "react-select";
-import { Loader2 } from "lucide-react";
-import { useAlbums } from "@/app/albums/hook/use-albums";
 import { useEffect } from "react";
+import { Loader2 } from "lucide-react";
+import { DeleteAlbumDialog } from "./delete-dialog";
+import { useAlbums } from "@/app/albums/hook/use-albums";
 
 const formSchema = z.object({
   name: z.string({ required_error: "Required" }).min(1, "Required"),
-  artist: z.object({
-    name: z.string({ required_error: "Required" }).min(1, "Required"),
-    country: z.string({ required_error: "Required" }).min(1, "Required"),
-  }),
+  artist: z.string({ required_error: "Required" }).min(1, "Required"),
   year: z.number({ required_error: "Required" }).min(1, "Required"),
 });
 type FormData = z.infer<typeof formSchema>;
@@ -36,13 +34,14 @@ interface IUpdateAlbumFormProps {
 }
 
 export function UpdateAlbumForm({ albumId }: IUpdateAlbumFormProps) {
-  const { artists, crerateAlbumMutation, findAlbumMutation } = useAlbums();
+  const { artists, updateAlbumMutation, findAlbumMutation } = useAlbums();
+
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
   });
 
   async function onSubmit(data: FormData) {
-    await crerateAlbumMutation.mutateAsync(data);
+    await updateAlbumMutation.mutateAsync({ ...data, "@key": albumId });
   }
 
   useEffect(() => {
@@ -51,6 +50,7 @@ export function UpdateAlbumForm({ albumId }: IUpdateAlbumFormProps) {
       if (album) {
         form.setValue("name", album.name);
         form.setValue("year", album.year);
+        form.setValue("artist", album.artist["@key"].split(":")[1]);
       }
     };
 
@@ -98,11 +98,13 @@ export function UpdateAlbumForm({ albumId }: IUpdateAlbumFormProps) {
                   <FormControl>
                     <Select
                       options={artists}
+                      value={artists.find(
+                        (artist) =>
+                          artist.data["@key"].split(":")[1] ===
+                          form.getValues("artist")
+                      )}
                       onChange={(e) =>
-                        field.onChange({
-                          name: e?.data.name,
-                          country: e?.data.country,
-                        })
+                        field.onChange(e?.data["@key"].split(":")[1])
                       }
                       className="w-full"
                     />
@@ -137,13 +139,15 @@ export function UpdateAlbumForm({ albumId }: IUpdateAlbumFormProps) {
           <Separator className="mt-2" />
         </div>
 
-        <div className="flex flex-col sm:flex-row-reverse gap-4 sm:gap-20 px-2 sm:px-12 pb-12">
-          <Button disabled={crerateAlbumMutation.isPending}>
-            {crerateAlbumMutation.isPending && (
+        <div className="flex flex-col sm:flex-row-reverse gap-4 px-2 sm:px-12 pb-12">
+          <Button disabled={updateAlbumMutation.isPending}>
+            {updateAlbumMutation.isPending && (
               <Loader2 className="w-4 h-4 mr-2 animate-spin" />
             )}
-            Create Album
+            Update Album
           </Button>
+
+          <DeleteAlbumDialog albumId={albumId} />
         </div>
       </form>
     </Form>
