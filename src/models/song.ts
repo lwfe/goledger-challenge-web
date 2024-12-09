@@ -115,6 +115,22 @@ async function deleteSong(song: ISong) {
   }
 }
 
+async function getSongOptions(): Promise<ISong[]> {
+  try {
+    const results = await api.post("/query/search", {
+      query: {
+        selector: {
+          "@assetType": "song",
+        },
+      },
+    });
+    return results.data.result;
+  } catch (error: any) {
+    console.error(error);
+    throw new Error(error.response.data.error);
+  }
+}
+
 export type { ISong, ISongAsset, IUpdateSong };
 export default Object.freeze({
   filterSongs,
@@ -122,4 +138,5 @@ export default Object.freeze({
   updateSong,
   findSong,
   deleteSong,
+  getSongOptions,
 });

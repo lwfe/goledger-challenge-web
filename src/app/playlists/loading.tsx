@@ -1,17 +1,12 @@
-"use client";
-import { usePlaylists } from "./hook/use-playlists";
-import { PlaylistArtwork } from "./components/playlist-artwork";
-
 import { LayoutHeader, LayoutWrapper } from "@/components/layout";
+import { SongSkeleton } from "./components/playlist-artwork-skeleton";
 import {
   BannerListContainer,
   BannerListHeader,
   BannerListWrapper,
 } from "@/components/banner-list";
 
-export default function PlaylistsPage() {
-  const { playlists } = usePlaylists();
-
+export default function SongsLoading() {
   return (
     <LayoutWrapper>
       <LayoutHeader
@@ -24,15 +19,8 @@ export default function PlaylistsPage() {
       <BannerListContainer>
         <BannerListHeader>Latest Playlists</BannerListHeader>
         <BannerListWrapper>
-          {playlists.map((playlist) => (
-            <PlaylistArtwork
-              key={playlist["@key"]}
-              aspectRatio="square"
-              className="w-[300px]"
-              playlist={playlist}
-              width={300}
-              height={300}
-            />
+          {Array.from({ length: 10 }).map((_, i) => (
+            <SongSkeleton key={i} />
           ))}
         </BannerListWrapper>
       </BannerListContainer>
@@ -40,15 +28,8 @@ export default function PlaylistsPage() {
       <BannerListContainer>
         <BannerListHeader>All Playlists</BannerListHeader>
         <BannerListWrapper>
-          {playlists.map((playlist) => (
-            <PlaylistArtwork
-              key={playlist["@key"]}
-              aspectRatio="square"
-              className="w-[300px]"
-              playlist={playlist}
-              width={300}
-              height={300}
-            />
+          {Array.from({ length: 10 }).map((_, i) => (
+            <SongSkeleton key={i} />
           ))}
         </BannerListWrapper>
       </BannerListContainer>
