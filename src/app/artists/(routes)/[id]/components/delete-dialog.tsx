@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Loader2, Trash2 } from "lucide-react";
-import { useAlbums } from "@/app/albums/hook/use-albums";
 import { Button } from "@/components/ui/button";
 import {
   AlertDialog,
@@ -14,14 +13,15 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { useArtists } from "@/app/artists/hook/use-artists";
 
-export function DeleteAlbumDialog({ albumId }: { albumId: string }) {
+export function DeleteArtistDialog({ artistId }: { artistId: string }) {
   const [open, setOpen] = useState(false);
-  const { deleteAlbumMutation, findAlbumMutation } = useAlbums();
+  const { deleteArtistMutation, findArtistMutation } = useArtists();
 
-  async function deleteAlbum(id: string) {
-    const album = await findAlbumMutation.mutateAsync(id);
-    await deleteAlbumMutation.mutateAsync(album);
+  async function deleteArtist(id: string) {
+    const artist = await findArtistMutation.mutateAsync(id);
+    await deleteArtistMutation.mutateAsync(artist);
     setOpen(false);
   }
 
@@ -32,28 +32,28 @@ export function DeleteAlbumDialog({ albumId }: { albumId: string }) {
           type="button"
           variant="ghost"
           className="text-destructive"
-          disabled={deleteAlbumMutation.isPending}
+          disabled={deleteArtistMutation.isPending}
         >
           <Trash2 className="w-4 h-4 mr-2" />
-          Delete Album
+          Delete Artist
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete the album
-            and remove it&apos;s data from our servers.
+            This action cannot be undone. This will permanently delete the
+            artist and remove it&apos;s data from our servers.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <Button
             variant={"destructive"}
-            disabled={deleteAlbumMutation.isPending}
-            onClick={() => deleteAlbum(albumId)}
+            disabled={deleteArtistMutation.isPending}
+            onClick={() => deleteArtist(artistId)}
           >
-            {deleteAlbumMutation.isPending && (
+            {deleteArtistMutation.isPending && (
               <Loader2 className="w-4 h-4 mr-2 animate-spin" />
             )}
             Continue

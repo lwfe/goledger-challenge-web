@@ -1,16 +1,12 @@
-"use client";
-import { useArtists } from "./hook/use-artists";
-import { ArtistArtwork } from "./components/artist-artwork";
 import { LayoutHeader, LayoutWrapper } from "@/components/layout";
+import { ArtistSkeleton } from "./components/artist-artwork-skeleton";
 import {
   BannerListContainer,
   BannerListHeader,
   BannerListWrapper,
 } from "@/components/banner-list";
 
-export default function AlbumsPage() {
-  const { artists } = useArtists();
-
+export default function AlbumsLoading() {
   return (
     <LayoutWrapper>
       <LayoutHeader
@@ -23,15 +19,8 @@ export default function AlbumsPage() {
       <BannerListContainer>
         <BannerListHeader>Trending Artists</BannerListHeader>
         <BannerListWrapper>
-          {artists.map((artist) => (
-            <ArtistArtwork
-              key={artist["@key"]}
-              aspectRatio="square"
-              className="w-[300px]"
-              artist={artist}
-              width={300}
-              height={300}
-            />
+          {Array.from({ length: 10 }).map((_, i) => (
+            <ArtistSkeleton key={i} />
           ))}
         </BannerListWrapper>
       </BannerListContainer>
@@ -39,15 +28,8 @@ export default function AlbumsPage() {
       <BannerListContainer>
         <BannerListHeader>All Artists</BannerListHeader>
         <BannerListWrapper>
-          {artists.map((album) => (
-            <ArtistArtwork
-              key={album["@key"]}
-              aspectRatio="square"
-              className="w-[300px]"
-              artist={album}
-              width={300}
-              height={300}
-            />
+          {Array.from({ length: 10 }).map((_, i) => (
+            <ArtistSkeleton key={i} />
           ))}
         </BannerListWrapper>
       </BannerListContainer>
