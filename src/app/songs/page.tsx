@@ -1,6 +1,17 @@
+"use client";
+import { useSongs } from "./hook/use-songs";
+import { SongArtwork } from "./components/song-artwork";
+
 import { LayoutHeader, LayoutWrapper } from "@/components/layout";
+import {
+  BannerListContainer,
+  BannerListHeader,
+  BannerListWrapper,
+} from "@/components/banner-list";
 
 export default function SongsPage() {
+  const { songs } = useSongs();
+
   return (
     <LayoutWrapper>
       <LayoutHeader
@@ -10,7 +21,37 @@ export default function SongsPage() {
         actionTitle="+ Create Song"
       />
 
-      <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
+      <BannerListContainer>
+        <BannerListHeader>Latest songs</BannerListHeader>
+        <BannerListWrapper>
+          {songs.map((song) => (
+            <SongArtwork
+              key={song["@key"]}
+              aspectRatio="square"
+              className="w-[300px]"
+              song={song}
+              width={300}
+              height={300}
+            />
+          ))}
+        </BannerListWrapper>
+      </BannerListContainer>
+
+      <BannerListContainer>
+        <BannerListHeader>All Songs</BannerListHeader>
+        <BannerListWrapper>
+          {songs.map((song) => (
+            <SongArtwork
+              key={song["@key"]}
+              aspectRatio="square"
+              className="w-[300px]"
+              song={song}
+              width={300}
+              height={300}
+            />
+          ))}
+        </BannerListWrapper>
+      </BannerListContainer>
     </LayoutWrapper>
   );
 }

@@ -1,9 +1,9 @@
-"use client";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 import { ChevronLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { LayoutWrapper } from "@/components/layout";
 import { UpdateAlbumForm } from "./components/form";
+import { LayoutWrapper } from "@/components/layout";
+import { buttonVariants } from "@/components/ui/button";
 
 export default function AlbumDetailsPage({
   params,
@@ -12,11 +12,12 @@ export default function AlbumDetailsPage({
 }) {
   return (
     <LayoutWrapper>
-      <Link href="/albums" className="w-fit">
-        <Button variant="link" className="text-xs">
-          <ChevronLeft className="mr-2 h-4 w-4" />
-          Go back to albums
-        </Button>
+      <Link
+        href="/albums"
+        className={cn(buttonVariants({ variant: "link" }), "w-fit text-xs")}
+      >
+        <ChevronLeft className="mr-2 h-4 w-4" />
+        Go back to albums
       </Link>
 
       <div className="px-2">

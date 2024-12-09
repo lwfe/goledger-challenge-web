@@ -115,6 +115,21 @@ const updateAlbum = async (data: IUpdateAlbum) => {
   }
 };
 
+async function getAlbumOptions(): Promise<IAlbum[]> {
+  try {
+    const results = await api.post("/query/search", {
+      query: {
+        selector: {
+          "@assetType": "album",
+        },
+      },
+    });
+    return results.data.result;
+  } catch (error: any) {
+    throw new Error(error.response.data.error);
+  }
+}
+
 export type { IAlbum, IAlbumAsset, IUpdateAlbum };
 export default Object.freeze({
   filterAlbums,
@@ -122,4 +137,5 @@ export default Object.freeze({
   deleteAlbum,
   findAlbum,
   updateAlbum,
+  getAlbumOptions,
 });

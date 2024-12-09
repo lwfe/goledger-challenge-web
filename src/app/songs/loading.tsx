@@ -1,5 +1,5 @@
 import { LayoutHeader, LayoutWrapper } from "@/components/layout";
-import { ArtistSkeleton } from "./components/artist-artwork-skeleton";
+import { SongSkeleton } from "./components/song-artwork-skeleton";
 import {
   BannerListContainer,
   BannerListHeader,
@@ -10,26 +10,26 @@ export default function SongsLoading() {
   return (
     <LayoutWrapper>
       <LayoutHeader
-        title="Artists"
-        description="Here's a list of available artists"
-        actionLink="/artists/new"
-        actionTitle="+ Create Artist"
+        title="Songs"
+        description="Here's a list of available songs"
+        actionLink="/songs/new"
+        actionTitle="+ Create Song"
       />
 
       <BannerListContainer>
-        <BannerListHeader>Trending Artists</BannerListHeader>
+        <BannerListHeader>Latest Songs</BannerListHeader>
         <BannerListWrapper>
           {Array.from({ length: 10 }).map((_, i) => (
-            <ArtistSkeleton key={i} />
+            <SongSkeleton key={i} />
           ))}
         </BannerListWrapper>
       </BannerListContainer>
 
       <BannerListContainer>
-        <BannerListHeader>All Artists</BannerListHeader>
+        <BannerListHeader>All Songs</BannerListHeader>
         <BannerListWrapper>
           {Array.from({ length: 10 }).map((_, i) => (
-            <ArtistSkeleton key={i} />
+            <SongSkeleton key={i} />
           ))}
         </BannerListWrapper>
       </BannerListContainer>

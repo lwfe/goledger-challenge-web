@@ -8,7 +8,7 @@ import {
   BannerListWrapper,
 } from "@/components/banner-list";
 
-export default function AlbumsPage() {
+export default function SongsPage() {
   const { artists } = useArtists();
 
   return (
