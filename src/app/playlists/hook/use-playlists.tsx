@@ -87,7 +87,7 @@ export const usePlaylists = () => {
     onSuccess: () => {
       toast({
         title: "Success",
-        description: `Song updated successfully`,
+        description: `Playlist updated successfully`,
       });
       route.push(`/playlists`);
     },

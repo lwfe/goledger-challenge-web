@@ -62,7 +62,7 @@ export const useSongs = () => {
     onSuccess: () => {
       toast({
         title: "Success",
-        description: `Album deleted successfully`,
+        description: `Song deleted successfully`,
       });
       songsQuery.refetch();
       route.push(`/songs`);

@@ -29,7 +29,7 @@ export const useArtists = () => {
     onSuccess: async (data) => {
       toast({
         title: "Success",
-        description: `Artista ${data[0].name} created successfully`,
+        description: `Artist ${data[0].name} created successfully`,
       });
       await artistsQuery.refetch();
       route.push(`/artists`);
