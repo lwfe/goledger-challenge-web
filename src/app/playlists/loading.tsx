@@ -6,7 +6,7 @@ import {
   BannerListWrapper,
 } from "@/components/banner-list";
 
-export default function SongsLoading() {
+export default function PlaylistsLoading() {
   return (
     <LayoutWrapper>
       <LayoutHeader

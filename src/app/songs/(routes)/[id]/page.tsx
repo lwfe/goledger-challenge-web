@@ -5,7 +5,7 @@ import { LayoutWrapper } from "@/components/layout";
 import { UpdateSongForm } from "./components/form";
 import { buttonVariants } from "@/components/ui/button";
 
-export default function AlbumDetailsPage({
+export default function SongDetailsPage({
   params,
 }: {
   params: { id: string };

@@ -4,7 +4,7 @@ import { ChevronLeft } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { LayoutWrapper } from "@/components/layout";
 
-export default function LoadingNewAlbumPage() {
+export default function LoadingNewSongPage() {
   return (
     <LayoutWrapper>
       <Link

@@ -1,4 +1,3 @@
-"use client";
 import { useArtists } from "./hook/use-artists";
 import { ArtistArtwork } from "./components/artist-artwork";
 import { LayoutHeader, LayoutWrapper } from "@/components/layout";
@@ -8,7 +7,7 @@ import {
   BannerListWrapper,
 } from "@/components/banner-list";
 
-export default function SongsPage() {
+export default function ArtistsPage() {
   const { artists } = useArtists();
 
   return (

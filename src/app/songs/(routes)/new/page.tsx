@@ -5,7 +5,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { LayoutWrapper } from "@/components/layout";
 import { CreateSongForm } from "./components/form";
 
-export default function NewAlbumPage() {
+export default function NewSongPage() {
   return (
     <LayoutWrapper>
       <Link

@@ -124,7 +124,7 @@ export function UpdateSongForm({ songId }: IUpdateSongFormProps) {
             {updateSongMutation.isPending && (
               <Loader2 className="w-4 h-4 mr-2 animate-spin" />
             )}
-            Update Album
+            Update Song
           </Button>
 
           <DeleteSongDialog songId={songId} />

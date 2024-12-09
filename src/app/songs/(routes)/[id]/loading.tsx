@@ -4,7 +4,7 @@ import { ChevronLeft } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { LayoutWrapper } from "@/components/layout";
 
-export default function AlbumDetailsPage() {
+export default function SongDetailsPage() {
   return (
     <LayoutWrapper>
       <Link
@@ -16,8 +16,8 @@ export default function AlbumDetailsPage() {
       </Link>
 
       <div className="px-2">
-        <h1 className="text-2xl font-semibold">Edit Album</h1>
-        <h4>Fill the form to update the album</h4>
+        <h1 className="text-2xl font-semibold">Edit Song</h1>
+        <h4>Fill the form to update the song</h4>
       </div>
     </LayoutWrapper>
   );
