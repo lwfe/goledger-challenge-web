@@ -1,8 +1,11 @@
+"use client";
+
+import { useState } from "react";
 import { Loader2, Trash2 } from "lucide-react";
+import { useAlbums } from "@/app/albums/hook/use-albums";
 import { Button } from "@/components/ui/button";
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -11,18 +14,19 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { useAlbums } from "@/app/albums/hook/use-albums";
 
 export function DeleteAlbumDialog({ albumId }: { albumId: string }) {
+  const [open, setOpen] = useState(false);
   const { deleteAlbumMutation, findAlbumMutation } = useAlbums();
 
   async function deleteAlbum(id: string) {
     const album = await findAlbumMutation.mutateAsync(id);
     await deleteAlbumMutation.mutateAsync(album);
+    setOpen(false);
   }
 
   return (
-    <AlertDialog>
+    <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger>
         <Button
           type="button"
@@ -44,8 +48,8 @@ export function DeleteAlbumDialog({ albumId }: { albumId: string }) {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction
-            className="bg-destructive"
+          <Button
+            variant={"destructive"}
             disabled={deleteAlbumMutation.isPending}
             onClick={() => deleteAlbum(albumId)}
           >
@@ -53,7 +57,7 @@ export function DeleteAlbumDialog({ albumId }: { albumId: string }) {
               <Loader2 className="w-4 h-4 mr-2 animate-spin" />
             )}
             Continue
-          </AlertDialogAction>
+          </Button>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

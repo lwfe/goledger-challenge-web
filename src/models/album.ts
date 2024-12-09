@@ -102,6 +102,8 @@ const updateAlbum = async (data: IUpdateAlbum) => {
       update: {
         "@assetType": "album",
         "@key": `album:${data["@key"]}`,
+        name: data.name,
+        year: data.year,
         artist: {
           "@key": `album:${data.artist}`,
         },

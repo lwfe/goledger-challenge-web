@@ -65,6 +65,7 @@ export const useAlbums = () => {
         description: `Album deleted successfully`,
       });
       albumsQuery.refetch();
+      route.push(`/albums`);
     },
     onError: (error) => {
       toast({

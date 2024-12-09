@@ -80,7 +80,7 @@ export function UpdateAlbumForm({ albumId }: IUpdateAlbumFormProps) {
                     Name
                   </FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input {...field} disabled />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -90,22 +90,20 @@ export function UpdateAlbumForm({ albumId }: IUpdateAlbumFormProps) {
             <FormField
               name="artist"
               control={form.control}
-              render={({ field }) => (
+              render={() => (
                 <FormItem className="flex flex-col sm:flex-row gap-2 sm:items-center">
                   <FormLabel className="w-full font-bold text-sm">
                     Artist
                   </FormLabel>
                   <FormControl>
                     <Select
+                      isDisabled
                       options={artists}
                       value={artists.find(
                         (artist) =>
                           artist.data["@key"].split(":")[1] ===
                           form.getValues("artist")
                       )}
-                      onChange={(e) =>
-                        field.onChange(e?.data["@key"].split(":")[1])
-                      }
                       className="w-full"
                     />
                   </FormControl>

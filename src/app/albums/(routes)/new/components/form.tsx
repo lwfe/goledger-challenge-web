@@ -22,10 +22,7 @@ import { useAlbums } from "@/app/albums/hook/use-albums";
 
 const formSchema = z.object({
   name: z.string({ required_error: "Required" }).min(1, "Required"),
-  artist: z.object({
-    name: z.string({ required_error: "Required" }).min(1, "Required"),
-    country: z.string({ required_error: "Required" }).min(1, "Required"),
-  }),
+  artist: z.string({ required_error: "Required" }).min(1, "Required"),
   year: z.number({ required_error: "Required" }).min(1, "Required"),
 });
 type FormData = z.infer<typeof formSchema>;
@@ -81,10 +78,7 @@ export function CreateAlbumForm() {
                     <Select
                       options={artists}
                       onChange={(e) =>
-                        field.onChange({
-                          name: e?.data.name,
-                          country: e?.data.country,
-                        })
+                        field.onChange(e?.data["@key"].split(":")[1])
                       }
                       className="w-full"
                     />
