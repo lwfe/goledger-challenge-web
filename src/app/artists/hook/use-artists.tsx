@@ -1,3 +1,5 @@
+"use client";
+
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
