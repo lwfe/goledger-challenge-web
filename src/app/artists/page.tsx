@@ -1,3 +1,4 @@
+"use client";
 import { useArtists } from "./hook/use-artists";
 import { ArtistArtwork } from "./components/artist-artwork";
 import { LayoutHeader, LayoutWrapper } from "@/components/layout";
